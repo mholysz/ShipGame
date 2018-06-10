@@ -11,7 +11,8 @@
 .idea/**/sqlDataSources.xml
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
-./idea
+.idea/
+ShipGame.iml
 
 
 # Gradle - builder czasami wykorzystywany:
