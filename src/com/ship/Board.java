@@ -11,6 +11,7 @@ public class Board {
         setBoard(size);
     }
 
+
     public BoardOccupation[][] getBoard() {
         return board;
     }
