@@ -1,14 +1,16 @@
 package com.ship;
 
+import com.ship.Enums.Direction;
+
 public class Ship {
     private int size;
-    private int direction;
+    private Direction direction;
     private boolean hit;
 
-    public Ship(int size, int direction, boolean hit) {
+    public Ship(int size, Direction direction) {
         this.size = size;
         this.direction = direction;
-        this.hit = hit;
+        this.hit = false;
     }
 
     public int getSize() {
@@ -19,11 +21,11 @@ public class Ship {
         this.size = size;
     }
 
-    public int getDirection() {
+    public Direction getDirection() {
         return direction;
     }
 
-    public void setDirection(int direction) {
+    public void setDirection(Direction direction) {
         this.direction = direction;
     }
 

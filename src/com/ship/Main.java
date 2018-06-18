@@ -1,5 +1,7 @@
 package com.ship;
 
+import com.ship.Enums.Direction;
+
 import java.util.Scanner;
 
 public class Main {
@@ -17,5 +19,36 @@ public class Main {
 
         System.out.println("\nComputer board: ");
         gameBoardComputer.showBoard();
+
+        ShipArrangment shipArrangment = new ShipArrangment();
+
+        try {
+            shipArrangment = new ShipArrangment(new Ship(4, Direction.Vertical), gameBoardUser, 2, 2);
+        } catch (IllegalArgumentException e) {
+            System.out.println("You gave wrong coordinates - " + e.getMessage().toUpperCase() +". Try again.");
+            return;
+        }
+
+
+        System.out.println("\nSTEP 1");
+        System.out.println("User board:");
+        try {
+            shipArrangment.setShipOnBoard().showBoard();
+        } catch (ArrayStoreException e){
+            System.out.println(e.getMessage().toUpperCase());
+        }
+
+        System.out.println("\nStep 2");
+        System.out.println("User board:");
+        shipArrangment.setShip(new Ship(3, Direction.Horizontal));
+        shipArrangment.setCordX(3);
+        shipArrangment.setCordY(2);
+        try {
+            shipArrangment.setShipOnBoard().showBoard();
+        } catch (ArrayStoreException e){
+            System.out.println(e.getMessage().toUpperCase());
+        }
+
+
     }
 }

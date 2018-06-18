@@ -1,7 +1,7 @@
-package com.ship;
+package com.ship.Enums;
 
 public enum BoardOccupation {
-    EMPTY,
-    OCCUPAIT,
+    EMP,
+    OCC,
     HIT,
 }
