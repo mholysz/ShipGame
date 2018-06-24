@@ -58,20 +58,21 @@ public class ShipArrangment {
         }
     }
 
-    private boolean checkNeighborhood(int cordX, int cordY) {
-        //TODO: Sprawdzenie czy przy zaproponowanych współrzędnych można postawić statek.
-        //Trzeba sprawdzic obszar od [coordX-1, cordY-1] do [cordX+ship.size+1, cordY+ship.size+1] - w zależności od kierunku ustawienia statku
-        if(ship.getDirection().equals(Direction.Horizontal))
-        for (int i = cordX-1; i < cordX+1; i++) {
-            for (int j = cordY-1; j < cordY+1; j++) {
+    private boolean checkNeighborhood() {
 
-            }
 
-        }
+        return false;
     }
 
     private boolean startCoordinatesOnBoard(int cordX, int cordY) {
         if (board.getBoard().length - cordX >= 0 && board.getBoard().length - cordY >= 0) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkCoordinateIfIsOnBoard(int cord){
+        if (board.getBoard().length - cord >= 0  && cord >=0){
             return true;
         }
         return false;

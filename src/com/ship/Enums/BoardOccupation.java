@@ -4,4 +4,5 @@ public enum BoardOccupation {
     EMP,
     OCC,
     HIT,
+    RES;
 }
