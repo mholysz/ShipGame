@@ -40,9 +40,9 @@ public class Main {
 
         System.out.println("\nStep 2");
         System.out.println("User board:");
-        shipArrangment.setShip(new Ship(3, Direction.Horizontal));
-        shipArrangment.setCordX(3);
-        shipArrangment.setCordY(2);
+        shipArrangment.setShip(new Ship(4, Direction.Horizontal));
+        shipArrangment.setCordX(0);
+        shipArrangment.setCordY(0);
         try {
             shipArrangment.setShipOnBoard().showBoard();
         } catch (ArrayStoreException e){

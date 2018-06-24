@@ -58,21 +58,8 @@ public class ShipArrangment {
         }
     }
 
-    private boolean checkNeighborhood() {
-
-
-        return false;
-    }
-
     private boolean startCoordinatesOnBoard(int cordX, int cordY) {
         if (board.getBoard().length - cordX >= 0 && board.getBoard().length - cordY >= 0) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean checkCoordinateIfIsOnBoard(int cord){
-        if (board.getBoard().length - cord >= 0  && cord >=0){
             return true;
         }
         return false;
