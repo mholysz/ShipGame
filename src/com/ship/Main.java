@@ -23,7 +23,7 @@ public class Main {
         ShipArrangment shipArrangment = new ShipArrangment();
 
         try {
-            shipArrangment = new ShipArrangment(new Ship(4, Direction.Vertical), gameBoardUser, 0, 9);
+            shipArrangment = new ShipArrangment(new Ship(4, Direction.Vertical), gameBoardUser, 0, 0);
         } catch (IllegalArgumentException e) {
             System.out.println("You gave wrong coordinates - " + e.getMessage().toUpperCase() +". Try again.");
             return;
@@ -40,9 +40,9 @@ public class Main {
 
         System.out.println("\nStep 2");
         System.out.println("User board:");
-        shipArrangment.setShip(new Ship(4, Direction.Horizontal));
+        shipArrangment.setShip(new Ship(3, Direction.Horizontal));
         shipArrangment.setCordX(0);
-        shipArrangment.setCordY(0);
+        shipArrangment.setCordY(2);
         try {
             shipArrangment.setShipOnBoard().showBoard();
         } catch (ArrayStoreException e){

@@ -11,7 +11,6 @@ public class Board {
         setBoard(size);
     }
 
-
     public BoardOccupation[][] getBoard() {
         return board;
     }
@@ -42,15 +41,6 @@ public class Board {
         return board;
     }
 
-
-    private boolean startCoordinatesOnBoard(int cordX, int cordY) {
-        if (board.length - cordX >= 0 && board.length - cordY >= 0) {
-            return true;
-        }
-        return false;
-    }
-
-
     private BoardOccupation[][] setReservationInShipNeighborhoodHorizontal(int x, int y, int shipSize) {
         for (int i = x - 1; i <= x + 1; i++) {
             for (int j = y - 1; j <= y + shipSize; j++) {
@@ -60,6 +50,17 @@ public class Board {
                     }
                 } catch (ArrayIndexOutOfBoundsException e) {
                     continue;
+                }
+            }
+        }
+        return board;
+    }
+
+    public BoardOccupation[][] clearRESstatus() {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] == BoardOccupation.RES) {
+                    board[i][j] = BoardOccupation.EMP;
                 }
             }
         }
@@ -80,14 +81,6 @@ public class Board {
         }
         return board;
     }
-
-    private boolean isOnBoardWhenCorr(int x) {
-        if (x >= 0 && x < board.length) {
-            return true;
-        }
-        return false;
-    }
-
 
     public void showBoard() {
         for (int i = 0; i < board.length; i++) {

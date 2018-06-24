@@ -1,5 +1,6 @@
 package com.ship;
 
+import com.ship.Enums.BoardOccupation;
 import com.ship.Enums.Direction;
 
 public class ShipArrangment {
@@ -78,15 +79,38 @@ public class ShipArrangment {
         return false;
     }
 
+    //TODO: Funkcja sprawdzająca czy na drodze nowych współrzędnych nie ma pola ze statusem RES.
+    private boolean checkRESstatusForNewShip(int cordX, int cordY) {
+        boolean result = true;
+        if (ship.getDirection().equals(Direction.Horizontal)) {
+            for (int j = cordY; j < cordY + ship.getSize(); j++) {
+                if (board.getBoard()[cordX][j] != BoardOccupation.RES && board.getBoard()[cordX][j] != BoardOccupation.OCC) {
+                    result = result;
+                } else {
+                    result = false;
+                }
+            }
+        } else if (ship.getDirection().equals(Direction.Vertical)) {
+            for (int i = cordX; i < cordX + ship.getSize(); i++) {
+                if (board.getBoard()[i][cordY] != BoardOccupation.RES && board.getBoard()[i][cordY] != BoardOccupation.OCC) {
+                    result = result;
+                } else {
+                    result = false;
+                }
+            }
+        }
+        return result;
+    }
+
     public Board setShipOnBoard() {
         if (ship.getDirection().equals(Direction.Horizontal)) {
-            if (startCoordinatesOnBoard(getCordX(), getCordY()) && endCoordinates(getCordX(), getCordY())) {
+            if (startCoordinatesOnBoard(getCordX(), getCordY()) && endCoordinates(getCordX(), getCordY()) && checkRESstatusForNewShip(getCordX(), getCordY())) {
                 board.setOnBoardHorizontal(getCordX(), getCordY(), ship.getSize());
             } else {
                 throw new ArrayStoreException("Ship cannot be put on board");
             }
         } else if (ship.getDirection().equals(Direction.Vertical)) {
-            if (startCoordinatesOnBoard(getCordX(), getCordY()) && endCoordinates(getCordX(), getCordY())) {
+            if (startCoordinatesOnBoard(getCordX(), getCordY()) && endCoordinates(getCordX(), getCordY()) && checkRESstatusForNewShip(getCordX(), getCordY())) {
                 board.setOnBoardVertical(getCordX(), getCordY(), getShip().getSize());
             } else {
                 throw new ArrayStoreException("Ship cannot be put on board");
