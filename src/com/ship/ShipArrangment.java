@@ -79,7 +79,6 @@ public class ShipArrangment {
         return false;
     }
 
-    //TODO: Funkcja sprawdzająca czy na drodze nowych współrzędnych nie ma pola ze statusem RES.
     private boolean checkRESstatusForNewShip(int cordX, int cordY) {
         boolean result = true;
         if (ship.getDirection().equals(Direction.Horizontal)) {

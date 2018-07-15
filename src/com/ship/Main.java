@@ -42,7 +42,7 @@ public class Main {
         System.out.println("User board:");
         shipArrangment.setShip(new Ship(3, Direction.Horizontal));
         shipArrangment.setCordX(0);
-        shipArrangment.setCordY(2);
+        shipArrangment.setCordY(1);
         try {
             shipArrangment.setShipOnBoard().showBoard();
         } catch (ArrayStoreException e){
