@@ -1,30 +1,21 @@
 package com.ship;
 
-import com.ship.Enums.BoardOccupation;
 import com.ship.Enums.Direction;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class ShipArrangment {
-    private Ship ship;
     private Board board;
     private int cordX;
     private int cordY;
+    private ArrayList<Integer> shipSize;
+    private Scanner sc = new Scanner(System.in);
 
-    public ShipArrangment() {
-    }
 
-    public ShipArrangment(Ship ship, Board board, int cordX, int cordY) {
-        this.ship = ship;
+    public ShipArrangment(Board board) {
         this.board = board;
-        setCordX(cordX);
-        setCordY(cordY);
-    }
-
-    public Ship getShip() {
-        return ship;
-    }
-
-    public void setShip(Ship ship) {
-        this.ship = ship;
+        this.shipSize = initShipList();
     }
 
     public Board getBoard() {
@@ -59,62 +50,45 @@ public class ShipArrangment {
         }
     }
 
-    private boolean startCoordinatesOnBoard(int cordX, int cordY) {
-        if (board.getBoard().length - cordX >= 0 && board.getBoard().length - cordY >= 0) {
-            return true;
-        }
-        return false;
+    private ArrayList<Integer> initShipList() {
+        ArrayList<Integer> shipList = new ArrayList<>();
+
+        shipList.add(4);
+        shipList.add(3);
+        shipList.add(3);
+        shipList.add(2);
+        shipList.add(2);
+        shipList.add(2);
+        shipList.add(1);
+        shipList.add(1);
+        shipList.add(1);
+        shipList.add(1);
+
+        return shipList;
     }
 
-    private boolean endCoordinates(int cordX, int cordY) {
-        if (ship.getDirection().equals(Direction.Horizontal)) {
-            if (board.getBoard().length - (cordY + ship.getSize()) >= 0)
-                return true;
-            else
-                return false;
-        } else if (ship.getDirection().equals(Direction.Vertical)) {
-            if (board.getBoard().length - (cordX + ship.getSize()) >= 0)
-                return true;
-        }
-        return false;
-    }
-
-    private boolean checkRESstatusForNewShip(int cordX, int cordY) {
-        boolean result = true;
-        if (ship.getDirection().equals(Direction.Horizontal)) {
-            for (int j = cordY; j < cordY + ship.getSize(); j++) {
-                if (board.getBoard()[cordX][j] != BoardOccupation.RES && board.getBoard()[cordX][j] != BoardOccupation.OCC) {
-                    result = result;
-                } else {
-                    result = false;
-                }
-            }
-        } else if (ship.getDirection().equals(Direction.Vertical)) {
-            for (int i = cordX; i < cordX + ship.getSize(); i++) {
-                if (board.getBoard()[i][cordY] != BoardOccupation.RES && board.getBoard()[i][cordY] != BoardOccupation.OCC) {
-                    result = result;
-                } else {
-                    result = false;
-                }
-            }
-        }
-        return result;
-    }
-
-    public Board setShipOnBoard() {
-        if (ship.getDirection().equals(Direction.Horizontal)) {
-            if (startCoordinatesOnBoard(getCordX(), getCordY()) && endCoordinates(getCordX(), getCordY()) && checkRESstatusForNewShip(getCordX(), getCordY())) {
-                board.setOnBoardHorizontal(getCordX(), getCordY(), ship.getSize());
+    public Board settingShipsOnBoardManual() {
+        for (int i = 0; i < shipSize.size(); i++) {
+            Ship ship = new Ship(shipSize.get(i));
+            System.out.println("Set coordinates for ship: " + ship.getSize());
+            System.out.println("Cord X: ");
+            setCordX(sc.nextInt());
+            System.out.println("Cord Y: ");
+            setCordY(sc.nextInt());
+            System.out.println("Podaj kierunek H/V: ");
+            String direction = sc.next();
+            if (direction.toLowerCase().equals("h")){
+                ship.setDirection(Direction.Horizontal);
+            } else if (direction.toLowerCase().equals("v")){
+                ship.setDirection(Direction.Vertical);
             } else {
-                throw new ArrayStoreException("Ship cannot be put on board");
+                throw new IllegalArgumentException("wrong letter");
             }
-        } else if (ship.getDirection().equals(Direction.Vertical)) {
-            if (startCoordinatesOnBoard(getCordX(), getCordY()) && endCoordinates(getCordX(), getCordY()) && checkRESstatusForNewShip(getCordX(), getCordY())) {
-                board.setOnBoardVertical(getCordX(), getCordY(), getShip().getSize());
-            } else {
-                throw new ArrayStoreException("Ship cannot be put on board");
-            }
+
+            board.setShipOnBoard(ship, getCordX(), getCordY());
+            board.showBoard();
         }
         return board;
     }
+
 }

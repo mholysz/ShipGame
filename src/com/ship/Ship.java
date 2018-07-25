@@ -2,14 +2,16 @@ package com.ship;
 
 import com.ship.Enums.Direction;
 
+import java.util.ArrayList;
+
 public class Ship {
     private int size;
     private Direction direction;
     private boolean hit;
 
-    public Ship(int size, Direction direction) {
-        this.size = size;
-        this.direction = direction;
+
+    public Ship(int size) {
+        setSize(size);
         this.hit = false;
     }
 
@@ -18,7 +20,22 @@ public class Ship {
     }
 
     public void setSize(int size) {
-        this.size = size;
+        switch (size){
+            case 1:
+                this.size = 1;
+                break;
+            case 2:
+                this.size=2;
+                break;
+            case 3:
+                this.size = 3;
+                break;
+            case 4:
+                this.size=4;
+                break;
+                default:
+                    throw new IllegalArgumentException();
+        }
     }
 
     public Direction getDirection() {
@@ -36,4 +53,6 @@ public class Ship {
     public void setHit(boolean hit) {
         this.hit = hit;
     }
+
+
 }
