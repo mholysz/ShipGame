@@ -3,6 +3,7 @@ package com.ship;
 import com.ship.Enums.Direction;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class ShipArrangment {
@@ -77,9 +78,9 @@ public class ShipArrangment {
             setCordY(sc.nextInt());
             System.out.println("Podaj kierunek H/V: ");
             String direction = sc.next();
-            if (direction.toLowerCase().equals("h")){
+            if (direction.toLowerCase().equals("h")) {
                 ship.setDirection(Direction.Horizontal);
-            } else if (direction.toLowerCase().equals("v")){
+            } else if (direction.toLowerCase().equals("v")) {
                 ship.setDirection(Direction.Vertical);
             } else {
                 throw new IllegalArgumentException("wrong letter");
@@ -87,6 +88,27 @@ public class ShipArrangment {
 
             board.setShipOnBoard(ship, getCordX(), getCordY());
             board.showBoard();
+        }
+        return board;
+    }
+
+    public Board settingShipsOnBoardAutomatic() {
+        Random rand = new Random();
+        for (int i = 0; i < shipSize.size(); i++) {
+            Ship ship = new Ship(shipSize.get(i));
+            setCordX(rand.nextInt(9));
+            setCordY(rand.nextInt(9));
+            int randomDirection = rand.nextInt(100);
+            if (randomDirection%2 == 0) {
+                ship.setDirection(Direction.Horizontal);
+            } else
+                ship.setDirection(Direction.Vertical);
+            try {
+                board.setShipOnBoard(ship, getCordX(), getCordY());
+            } catch (ArrayStoreException exceptionBoard){
+                i--;
+            }
+         //   board.showBoard();
         }
         return board;
     }

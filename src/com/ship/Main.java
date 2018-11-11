@@ -12,20 +12,27 @@ public class Main {
         System.out.println("Witam w grze w statki.");
 
         Board gameBoardUser = new Board();
-//        Board gameBoardComputer = new Board();
+        Board gameBoardComputer = new Board();
 
-        System.out.println("User board:");
-        gameBoardUser.showBoard();
+     //   System.out.println("User board:");
+      //  gameBoardUser.showBoard();
 
 //        System.out.println("\nComputer board: ");
 //        gameBoardComputer.showBoard();
 
-        ShipArrangment userShipArrangment = new ShipArrangment(gameBoardUser);
+        ShipArrangment compShipArrangment = new ShipArrangment(gameBoardComputer);
+        compShipArrangment.settingShipsOnBoardAutomatic();
 
-        userShipArrangment.settingShipsOnBoardManual();
+        ShipArrangment userShipArrangment = new ShipArrangment(gameBoardUser);
+        //userShipArrangment.settingShipsOnBoardManual();
+        userShipArrangment.settingShipsOnBoardAutomatic();
 
         System.out.println("User Board after setting ships");
         userShipArrangment.getBoard().showBoard();
+
+
+        System.out.println("\n Computer Board after setting ships");
+        compShipArrangment.getBoard().showBoard();
 
 
     }
